@@ -1,0 +1,19 @@
+{
+  "name": "conjs",
+  "version": "0.1.0",
+  "description": "conway's game of life",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "kevlarr",
+  "license": "(MIT OR Apache-2.0)",
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0",
+    "copy-webpack-plugin": "^5.0.4"
+  }
+}
