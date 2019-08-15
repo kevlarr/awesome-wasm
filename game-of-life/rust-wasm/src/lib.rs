@@ -31,6 +31,8 @@ pub struct Universe {
     height: u32,
     width: u32,
     cells: Vec<Cell>,
+    row_deltas: [u32; 3],
+    col_deltas: [u32; 3],
 }
 
 #[wasm_bindgen]
@@ -40,7 +42,7 @@ impl Universe {
             .map(|_| if JS::Math::random() < 0.5 { Cell::Alive } else { Cell::Dead })
             .collect();
 
-        Universe { cells, height, width }
+        Universe { cells, height, width, row_deltas: [height - 1, 0, 1], col_deltas: [width - 1, 0, 1] }
     }
 
     pub fn height(&self) -> u32 {
@@ -96,14 +98,15 @@ impl Universe {
 
         // Use deltas and modulus to prevent "special-casing" the edges
         // and enabling left edge to "neighbor" right edge, etc.
-        for drow in [self.height - 1, 0, 1].iter().cloned() {
-            for dcol in [self.width - 1, 0, 1].iter().cloned() {
+        for drow in self.row_deltas.iter() {
+            for dcol in self.col_deltas.iter() {
                 // Don't count "self" cell
-                if drow == 0 && dcol == 0 { continue; }
+                if *drow == 0 && *dcol == 0 { continue; }
 
                 let neighbor_row = (row + drow) % self.height;
                 let neighbor_col = (col + dcol) % self.width;
                 let i = self.index(neighbor_row, neighbor_col);
+
                 count += self.cells[i] as u8;
             }
         }

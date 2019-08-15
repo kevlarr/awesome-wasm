@@ -16,6 +16,10 @@ class Universe {
   constructor(width, height) {
     this._length = width * height;
 
+    // To avoid allocating arrays in countLiveNeighbors
+    this._row_deltas = [height - 1, 0, 1];
+    this._col_deltas = [width  - 1, 0, 1];
+
     this.width = width;
     this.height = height;
     this.cells = this.newArray();
@@ -48,10 +52,11 @@ class Universe {
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
         const i = this.indexFor(row, col);
-        const cell = this.cells[i];
-        const liveNeighbors = this.countLiveNeighbors(row, col);
 
-        nextCells[i] = this.nextCell(cell, liveNeighbors);
+        nextCells[i] = this.nextCell(
+          this.cells[i],
+          this.countLiveNeighbors(row, col)
+        );
       }
     }
 
@@ -75,16 +80,23 @@ class Universe {
 
       // Use deltas and modulus to prevent "special-casing" the edges
       // and enabling left edge to "neighbor" right edge, etc.
-      [this.height - 1, 0, 1].forEach(drow => {
-          [this.width - 1, 0, 1].forEach(dcol => {
+      this._row_deltas.forEach(drow => {
+          this._col_deltas.forEach(dcol => {
               // Don't count "self"
               if (drow === 0 && dcol === 0) { return; }
 
+              /*
               let neighborRow = (row + drow) % this.height;
               let neighborCol = (col + dcol) % this.width;
               let i = this.indexFor(neighborRow, neighborCol);
 
               count += this.cells[i];
+              */
+
+              count += this.cells[this.indexFor(
+                (row + drow) % this.height,
+                (col + dcol) % this.width
+              )];
           });
       });
 
