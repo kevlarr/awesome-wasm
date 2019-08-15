@@ -2,7 +2,7 @@
 //import { memory } from 'conwasm/conwasm_bg';
 
 const GRID_COLOR = '#333';
-const DEAD_COLOR = '#000';
+const DEAD_COLOR = '#333';
 const ALIVE_COLOR = 'rgb(18, 129, 186)';
 
 const ALIVE = 1;

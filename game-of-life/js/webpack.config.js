@@ -8,6 +8,9 @@ module.exports = {
     filename: "index.js",
   },
   mode: "development",
+  devServer: {
+    port: 9002,
+  },
   plugins: [
     new CopyWebpackPlugin(['index.html'])
   ],
