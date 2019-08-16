@@ -3,7 +3,7 @@
 
 const GRID_COLOR = '#333';
 const DEAD_COLOR = '#333';
-const ALIVE_COLOR = 'rgb(18, 129, 186)';
+const ALIVE_COLOR = 'rgb(0, 150, 215)';
 
 const ALIVE = 1;
 const DEAD = 0;
@@ -186,6 +186,7 @@ class GameOfLife {
         heightInput: byId('gameHeight'),
         cellSizeInput: byId('cellSize'),
         togglePlaying: byId('togglePlaying'),
+        toggleRender: byId('shouldRender'),
     };
 
     const newGame = () => {
@@ -204,10 +205,12 @@ class GameOfLife {
 
     let gameOfLife = newGame();
     let animationId = null;
+    let shouldRender = true;
 
     const loop = () => {
         gameOfLife.next();
-        gameOfLife.render();
+
+        if (shouldRender) { gameOfLife.render(); }
 
         animationId = requestAnimationFrame(loop);
     };
@@ -231,8 +234,12 @@ class GameOfLife {
         gameOfLife = newGame();
     };
 
-    els.togglePlaying.addEventListener('click', (_event) => {
+    els.togglePlaying.addEventListener('click', _evt => {
         animationId ? pause() : play();
+    });
+
+    els.toggleRender.addEventListener('change', _evt => {
+        shouldRender = !shouldRender;
     });
 
     [els.widthInput, els.heightInput, els.cellSizeInput].forEach(input => {
