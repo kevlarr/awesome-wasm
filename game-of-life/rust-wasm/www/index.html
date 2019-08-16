@@ -2,24 +2,43 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello wasm-pack!</title>
+    <title>Game of Life | Wasm</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="gameControls">
-      <label for="gameWidth">Width</label>
-      <input id="gameWidth" type="number" min=16 step=16 value=64 required/>
+      <a href="https://blog.rocketinsights.com/" target="_blank">
+        <img src="white-rocket.png" class="logo"/>
+      </a>
 
-      <label for="gameHeight">Height</label>
-      <input id="gameHeight" type="number" min=8 step=8 value=32 required/>
+      <div class="control-group">
+        <label for="gameWidth" class="control-label">Width</label>
+        <input type="number" id="gameWidth" class="control" name="game-width" min=16 step=16 value=64 required/>
+      </div>
 
-      <label for="cellSize">Size</label>
-      <input id="cellSize" type="number" min=1 step=1 value=4 required/>
+      <div class="control-group">
+        <label for="gameHeight" class="control-label">Height</label>
+        <input type="number" id="gameHeight" class="control" name="game-height" min=8 step=8 value=32 required/>
+      </div>
 
-      <button id="togglePlaying">Play</button>
+      <div class="control-group">
+        <label for="cellSize" class="control-label">Size</label>
+        <input type="number" id="cellSize" class="control" name="cell-size" min=1 max=12 step=1 value=4 required/>
+      </div>
+
+      <div class="control-group">
+        <button id="togglePlaying" class="btn" autofocus>Play</button>
+      </div>
+
+      <div class="control-group">
+        <input type="checkbox" id="shouldRender" name="should-render" checked>
+        <label for="shouldRender" class="control-label">Render</label>
+      </div>
     </div>
 
-    <canvas id="gameCanvas"></canvas>
+    <div id="canvasWrapper">
+      <canvas id="gameCanvas"></canvas>
+    </div>
 
     <script src="./bootstrap.js"></script>
   </body>

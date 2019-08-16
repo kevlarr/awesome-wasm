@@ -21,6 +21,9 @@
         - Embedded in host that grants 'abilities'
 
 
+calls between Wasm and JS were initially slow but have been much improved**
+
+
 4. Future directionss
     - Host bindings (direct, efficient access to Web APIs and DOM)
     - Non-web hosts, including WASI

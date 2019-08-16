@@ -1,7 +1,6 @@
 import { Cell, Universe } from 'conwasm';
 import { memory } from 'conwasm/conwasm_bg';
 
-const GRID_COLOR = '#333';
 const DEAD_COLOR = '#333';
 const ALIVE_COLOR = 'rgb(0, 150, 215)';
 
@@ -16,14 +15,6 @@ class GameOfLife {
         this.canvas.addEventListener('click', this.click.bind(this));
 
         this.ctx = this.canvas.getContext('2d');
-    }
-
-    get height() {
-        return this.universe.height();
-    }
-
-    get width() {
-        return this.universe.width();
     }
 
     click(event) {
@@ -49,7 +40,7 @@ class GameOfLife {
     }
 
     getIndex(row, col) {
-        return row * this.width + col;
+        return row * this.universe.width() + col;
     }
 
     next() {
@@ -58,12 +49,12 @@ class GameOfLife {
 
     render() {
         const cellsPtr = this.universe.cells();
-        const cells = new Uint8Array(memory.buffer, cellsPtr, this.width * this.height);
+        const cells = new Uint8Array(memory.buffer, cellsPtr, this.universe.width() * this.universe.height());
 
         this.ctx.beginPath();
 
-        for (let row = 0; row < this.height; row++) {
-            for (let col = 0; col < this.width; col++) {
+        for (let row = 0; row < this.universe.height(); row++) {
+            for (let col = 0; col < this.universe.width(); col++) {
                 const i = this.getIndex(row, col);
 
                 this.ctx.fillStyle = cells[i] === Cell.Dead ? DEAD_COLOR : ALIVE_COLOR;
@@ -89,6 +80,7 @@ class GameOfLife {
         heightInput: byId('gameHeight'),
         cellSizeInput: byId('cellSize'),
         togglePlaying: byId('togglePlaying'),
+        toggleRender: byId('shouldRender'),
     };
 
     const newGame = () => {
@@ -107,10 +99,12 @@ class GameOfLife {
 
     let gameOfLife = newGame();
     let animationId = null;
+    let shouldRender = true;
 
     const loop = () => {
         gameOfLife.next();
-        gameOfLife.render();
+
+        if (shouldRender) { gameOfLife.render(); }
 
         animationId = requestAnimationFrame(loop);
     };
@@ -134,8 +128,12 @@ class GameOfLife {
         gameOfLife = newGame();
     };
 
-    els.togglePlaying.addEventListener('click', (_event) => {
+    els.togglePlaying.addEventListener('click', _evt => {
         animationId ? pause() : play();
+    });
+
+    els.toggleRender.addEventListener('change', _evt => {
+        shouldRender = !shouldRender;
     });
 
     [els.widthInput, els.heightInput, els.cellSizeInput].forEach(input => {

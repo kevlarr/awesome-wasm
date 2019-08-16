@@ -1,6 +1,3 @@
-//import { Cell, Universe } from 'conwasm';
-//import { memory } from 'conwasm/conwasm_bg';
-
 const GRID_COLOR = '#333';
 const DEAD_COLOR = '#333';
 const ALIVE_COLOR = 'rgb(0, 150, 215)';

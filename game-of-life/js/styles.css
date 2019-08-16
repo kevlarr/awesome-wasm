@@ -27,6 +27,7 @@ label, button {
     height: 35px;
     justify-content: space-around;
     width: 100%;
+    z-index: 1;
 }
 
 #canvasWrapper {
