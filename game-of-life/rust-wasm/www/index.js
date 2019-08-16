@@ -57,11 +57,6 @@ class GameOfLife {
     }
 
     render() {
-        //this.drawGrid();
-        this.drawCells();
-    }
-
-    drawCells() {
         const cellsPtr = this.universe.cells();
         const cells = new Uint8Array(memory.buffer, cellsPtr, this.width * this.height);
 
@@ -83,29 +78,6 @@ class GameOfLife {
 
         this.ctx.stroke();
     }
-
-    /*
-    drawGrid() {
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = GRID_COLOR;
-
-        for (let i = 0; i <= this.width; i++) {
-            const x = i * (this.cellSize + 1) + 1;
-
-            this.ctx.moveTo(x, 0);
-            this.ctx.lineTo(x, (this.cellSize + 1) * this.height + 1);
-        }
-
-        for (let j = 0; j <= this.height; j++) {
-            const y = j * (this.cellSize + 1) + 1;
-
-            this.ctx.moveTo(0, y);
-            this.ctx.lineTo((this.cellSize + 1) * this.width + 1, y);
-        }
-
-        this.ctx.stroke();
-    }
-    */
 }
 
 (function main() {
