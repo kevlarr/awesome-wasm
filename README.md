@@ -1,16 +1,54 @@
-# Awesome Wasm
+# Awesome Wasm! wat?
+
+**tl;dr** WebAssembly (Wasm) is now the official second language^1 of the web world,
+offering a compact and fast^2 complement to JavaScript.
+
+> ^1 Well, mostly official: https://caniuse.com/#feat=wasm
+> ^2 Load, parse, and execution times are often ~20%-30% faster
+
+---
+
+## Background
+
+### A (Comically Brief, Incomplete, and Quite Possibly Inaccurate) History of JavaScript
+
+- In **The Beginning**, there was static text
+- 1995: JavaScript created to give designers a 'behavior layer'
+- 1996-2007: JavaScript remained fully interpreted (read: slow)
+- 2008: Google released V8, which included JIT and several optimization tiers (other browsers followed suit)
+- 2011: Google released Native Client (NaCl), a sandboxing tech for running native code in browser
+- 2013: Mozilla released asm.js as a compile target for C (performance aided by optimizers and 'no' GC)
+
+### Why Not Stop There?
+
+JavaScript was now *fast* (and asm.js even faster), but...
+
+... parsing a JS file into an AST is still time-consuming, and...
+
+... the browsers' optimization techniques still incur runtime overhead.
+
+<!--Basically, asm.js was a great experiment for squeezing even more speed out of the JavaScript VMs-->
+<!--... predictability/determinism of optimizations...?-->
+
+--- 
+
+## adf
+
+<!--asm.js and NaCl were great experiments, but in 2015 engineers from Mozilla, Microsoft, Apple, and Google-->
+<!--began to work on a joint prototype. By 2017 they had settled -->
 
 
-1. A brief history of the (JavaScript) universe
-    - Need for scripting, fully interpreted language was fine
-    - JIT, optimization cycles to improve runtime performance
-    - asm.js 'subset' designed to take advantage of the optimization techniques, but parsing/optimizing still slow
+From the source:
 
-2. What problems remained
-    - Parsing was still a very time consuming process...
-    - ... as were the runtime optimizers
-    - ... predictability/determinism of optimizations...?
-    - TODO but why start with C/++?
+> There are two main benefits WebAssembly provides:
+>
+>   - The kind of binary format being considered for WebAssembly can be natively decoded much faster than JavaScript can be parsed (experiments show more than 20× faster). On mobile, large compiled codes can easily take 20–40 seconds just to parse, so native decoding (especially when combined with other techniques like streaming for better-than-gzip compression) is critical to providing a good cold-load user experience.
+>
+>   - By avoiding the simultaneous asm.js constraints of AOT-compilability and good performance even on engines without specific asm.js optimizations, a new standard makes it much easier to add the features :unicorn: required to reach native levels of performance.
+
+
+
+
 
 3. WebAssembly MVP
     - Streaming
@@ -30,16 +68,6 @@ calls between Wasm and JS were initially slow but have been much improved**
 
 
 ---
-
-Game of Life
-
-- want FPS count
-- interactive controls for...
-    - cell size
-    - grid size passed through to wasm?
-
-
-
 
 
 
