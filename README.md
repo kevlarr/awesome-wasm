@@ -1,7 +1,7 @@
 # Awesome Wasm! wat?
 
 **tl;dr** WebAssembly (Wasm) is now the official second language^1 of the web world,
-offering a compact and fast^2 complement to JavaScript.
+offering a compact and performant^2 complement to JavaScript.
 
 > ^1 Well, mostly official: https://caniuse.com/#feat=wasm
 > ^2 Load, parse, and execution times are often ~20%-30% faster
@@ -15,8 +15,31 @@ offering a compact and fast^2 complement to JavaScript.
 - In **The Beginning**, there was static text
 - 1995: JavaScript created to give designers a 'behavior layer'
 - 1996-2007: JavaScript remained fully interpreted (read: slow)
-- 2008: Google released V8, which included JIT and several optimization tiers (other browsers followed suit)
-- 2011: Google released Native Client (NaCl), a sandboxing tech for running native code in browser
+- 2008: Google released V8, which included JIT and several optimization tiers (other browsers followed suit)^3
+
+> ^3 For a great description of JIT compilers, profilings, etc.
+> see [this great post](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/) by Lin Clark
+
+### Need for More Speed
+
+Lin Clark wrote [an excellent article](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/)
+describing the nature of JIT compilers, including benefits and trade-offs.
+
+> [JIT] makes JavaScript run faster by monitoring the code as it’s running it and sending hot code paths to be optimized.
+> This has resulted in many-fold performance improvements for most JavaScript applications.
+
+> Even with these improvements, though, the performance of JavaScript can be unpredictable.
+> And to make things faster, the JIT has added some overhead during runtime, including:
+>
+> - optimization and deoptimization
+> - memory used for the monitor’s bookkeeping and recovery information for when bailouts happen
+> - memory used to store baseline and optimized versions of a function
+
+
+Browsers were starting to get *fast* at executing JavaScript,
+but Google and Mozilla independently began working on projects :col
+
+- 2011: Google released Native Client (NaCl), a prototype sandboxing tech for running native code in browser
 - 2013: Mozilla released asm.js as a compile target for C (performance aided by optimizers and 'no' GC)
 
 ### Why Not Stop There?
@@ -45,6 +68,14 @@ From the source:
 >   - The kind of binary format being considered for WebAssembly can be natively decoded much faster than JavaScript can be parsed (experiments show more than 20× faster). On mobile, large compiled codes can easily take 20–40 seconds just to parse, so native decoding (especially when combined with other techniques like streaming for better-than-gzip compression) is critical to providing a good cold-load user experience.
 >
 >   - By avoiding the simultaneous asm.js constraints of AOT-compilability and good performance even on engines without specific asm.js optimizations, a new standard makes it much easier to add the features :unicorn: required to reach native levels of performance.
+
+
+---
+
+## Game of Life
+
+Conway's Game of Life in [Wasm](https://awesome-wasm-game-of-life.s3.amazonaws.com/wasm/index.html)
+and [JS](https://awesome-wasm-game-of-life.s3.amazonaws.com/javascript/index.html).
 
 
 
