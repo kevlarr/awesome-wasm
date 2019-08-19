@@ -1,33 +1,54 @@
-# Awesome Wasm! wat?
+# Awesome Wasm
 
-**tl;dr** WebAssembly (Wasm) is now the official second language^1 of the web world,
-offering a compact and performant^2 complement to JavaScript.
+**tl;dr:** WebAssembly (Wasm) is now the official second language<sup>1</sup> of the web world,
+offering a compact and performant<sup>2</sup> complement to JavaScript.
 
-> ^1 Well, mostly official: https://caniuse.com/#feat=wasm
-> ^2 Load, parse, and execution times are often ~20%-30% faster
-
----
+> <sup>1</sup> Well, mostly official: https://caniuse.com/#feat=wasm
+>
+> <sup>2</sup> Load, parse, and execution times are often ~20%-30% faster
 
 ## Background
 
-### A (Comically Brief, Incomplete, and Quite Possibly Inaccurate) History of JavaScript
+<sub>Or, *A (Comically Brief, Incomplete, and Quite Possibly Inaccurate) History of Client-side Code*</sub>
 
-- In **The Beginning**, there was static text
-- 1995: JavaScript created to give designers a 'behavior layer'
-- 1996-2007: JavaScript remained fully interpreted (read: slow)
-- 2008: Google released V8, which included JIT and several optimization tiers (other browsers followed suit)^3
+In **The Beginning**, there was static text.
 
-> ^3 For a great description of JIT compilers, profilings, etc.
-> see [this great post](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/) by Lin Clark
+**1995**
 
-### Need for More Speed
+JavaScript was created to give designers a 'behavior layer'.
 
-Lin Clark wrote [an excellent article](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/)
-describing the nature of JIT compilers, including benefits and trade-offs.
+**1996-2007**
+
+JavaScript remained fully interpreted (read: slow) and this was generally fine,
+because Java applets were originally intended to provide a 'performant' option.
+
+**2008**
+
+Google released V8, which introduced the first JIT compiler for JavaScript and
+set JavaScript on a path toward remarkably fast execution speeds<sup>3</sup>.
+
+**2011**
+
+Google released Portable Native Client (PNaCl, pronouned "pinnacle"), offering a compile target
+for C/C++ with the goal of achieving near-native speed in the browser.
+
+**2013**
+
+Mozilla released asm.js as a compile target for C that, unlike PNaCl, leveraged the existing
+JavaScript VMs to execute more optimized code while 'bypassing' the garbage collector.
+
+
+<sup>3</sup>
+<small>Lin Clark wrote [an excellent article](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/) describing how these compilers work at a high level</small>
+
+
+### Beyond JIT
+
+To summarize some trade-offs:
 
 > [JIT] makes JavaScript run faster by monitoring the code as it’s running it and sending hot code paths to be optimized.
 > This has resulted in many-fold performance improvements for most JavaScript applications.
-
+>
 > Even with these improvements, though, the performance of JavaScript can be unpredictable.
 > And to make things faster, the JIT has added some overhead during runtime, including:
 >
@@ -35,12 +56,24 @@ describing the nature of JIT compilers, including benefits and trade-offs.
 > - memory used for the monitor’s bookkeeping and recovery information for when bailouts happen
 > - memory used to store baseline and optimized versions of a function
 
+While JavaScript had now become much faster (especially as other browser vendors introduced their own compilers and they competed for speed),
+Google and Mozilla independently explored different paths for ta
 
-Browsers were starting to get *fast* at executing JavaScript,
-but Google and Mozilla independently began working on projects :col
 
-- 2011: Google released Native Client (NaCl), a prototype sandboxing tech for running native code in browser
+
+
+
+**2011**
+
+
 - 2013: Mozilla released asm.js as a compile target for C (performance aided by optimizers and 'no' GC)
+
+
+
+
+
+
+
 
 ### Why Not Stop There?
 
