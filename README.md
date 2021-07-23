@@ -3,7 +3,9 @@
 ### Good articles
 
 https://blog.scottlogic.com/2018/04/26/webassembly-by-hand.html
+
 https://www.javascriptjanuary.com/blog/webassembly-neither-web-nor-assembly-but-revolutionary
+
 https://blog.logrocket.com/webassembly-how-and-why-559b7f96cd71/
 
 
